@@ -1,12 +1,15 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Nav(){
+    
     const dim="flex my-2 py-3 px-2 rounded-lg"
     const inactiveLink=dim+" text-fontgray"
     const activeLink=dim+" text-white bg-card"
-    function handleNavSelect(){
-          
-    }
+    const router=useRouter()
+    const {pathname}=router
+
+
     return (
       <aside className="text-white p-4">
         <Link href={'/'} className="flex gap-2 mb-4 mr-5 text-2xl">
@@ -27,10 +30,10 @@ export default function Nav(){
           <span className="text-white"> Canteen Admin</span>
         </Link>
         <nav className="flex flex-col gap-2 mt-20">
-        <Link href={"/"} className={activeLink}>Dashboard</Link>
-        <Link href={"/"} className={inactiveLink}>Orders</Link>
-        <Link href={"/"} className={inactiveLink}>Menu</Link>
-        <Link href={"/"} className={inactiveLink}>Settings</Link>
+        <Link href={"/"} className={pathname==='/'?activeLink:inactiveLink}>Dashboard</Link>
+        <Link href={"/orders"} className={pathname.includes('/orders')?activeLink:inactiveLink}>Orders</Link>
+        <Link href={"/menu"} className={pathname.includes('/menu')?activeLink:inactiveLink}>Menu</Link>
+        <Link href={"/settings"} className={pathname.includes('/settings')?activeLink:inactiveLink}>Settings</Link>
         </nav>
       </aside>
     );
